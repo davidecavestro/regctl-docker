@@ -1,0 +1,15 @@
+FROM curlimages/curl AS downloader
+ARG TAG
+ARG TARGETARCH
+
+RUN export VERSION=$(echo ${TAG} | sed 's/^v//') \
+  && mkdir -p /tmp/share \
+  && curl -o /tmp/share/regctl --fail -sSL https://github.com/regclient/regclient/releases/download/${TAG}/regctl-linux-${TARGETARCH} \
+  && curl -o /tmp/share/regsync --fail -sSL https://github.com/regclient/regclient/releases/download/${TAG}/regsync-linux-${TARGETARCH} \
+  && curl -o /tmp/share/regbot --fail -sSL https://github.com/regclient/regclient/releases/download/${TAG}/regbot-linux-${TARGETARCH}
+
+
+FROM alpine
+COPY --from=downloader /tmp/share/* /usr/local/bin/
+ENTRYPOINT ["/usr/local/bin/regctl"]
+CMD ["--help"]
