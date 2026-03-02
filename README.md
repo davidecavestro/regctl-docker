@@ -25,3 +25,9 @@ Why another `regctl` image given that there's [the official one](https://github.
 The official image is usually preferable but it lacks the `sleep` executable, making it hard to use for CI - namely on a k8s pod - where the container should simply wait for commands.
 
 Hence this image, built on alpine/debian/busybox variants.
+
+
+## How
+
+New images are automatically built when the mainstream project publishes new tags.
+In case of problems please fill an issue.
