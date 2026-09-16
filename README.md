@@ -1,3 +1,9 @@
+> [!TIP]
+You can use the official image instead..<br>
+The `regclient/regctl:alpine` flavor has everything you need.<br>
+And in case you still need the distroless flavor on k8s pods that should sit idle waiting for later commands you can replace any `sleep` command with
+`registry login --user fake --pass-stdin`
+
 # regctl-docker
 
 Unofficial multiarch docker image for [regclient](https://github.com/regclient/regclient), client interface for the container registry API.
